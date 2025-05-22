@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
 
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" />
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1000.0" styleClass="menu_container" stylesheets="@../Styles/Menu.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alpha" />
+      <Spinner layoutX="186.0" layoutY="22.0" prefWidth="60.0" />
+      <Text layoutX="189.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mass" />
+      <Spinner layoutX="380.0" layoutY="22.0" prefWidth="60.0" />
+      <Text layoutX="665.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="n step" />
+      <Spinner layoutX="530.0" layoutY="22.0" prefWidth="60.0" />
+      <Text layoutX="620.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x0" />
+      <Spinner layoutX="410.0" layoutY="22.0" prefWidth="60.0" />
+      <Text layoutX="632.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="y0" />
+      <Spinner layoutX="440.0" layoutY="22.0" prefWidth="60.0" />
+      <Text layoutX="643.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vx0" />
+      <Spinner layoutX="470.0" layoutY="22.0" prefWidth="60.0" />
+      <Text layoutX="654.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vy0" />
+      <Spinner layoutX="500.0" layoutY="22.0" prefWidth="60.0" />
+      <Button mnemonicParsing="false" text="Calculate" />
+      <ToggleButton mnemonicParsing="false" text="One Graphs" />
+      <ToggleButton mnemonicParsing="false" text="Four Graphs" />
+   </children>
+</HBox>
