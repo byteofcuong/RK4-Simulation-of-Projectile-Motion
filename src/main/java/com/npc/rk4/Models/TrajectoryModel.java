@@ -47,6 +47,52 @@ public class TrajectoryModel {
 
         double[] time = RungeKutta.linspace(0, estimatedTime, nSteps + 1);
 
+        // Tìm điểm mà quỹ đạo chạm đất
+        int lastValidIndex = nSteps;
+        for (int i = 0; i < nSteps; i++) {
+            if (y[i] < 0) {
+                lastValidIndex = i;
+                break;
+            }
+        }
+
+        // nội suy Lagrange xác định thời điểm và vị trí chạm đất
+        if (lastValidIndex < nSteps) {
+            int i0 = lastValidIndex - 1;
+            int i1 = lastValidIndex;
+
+            double y0Value = 0;
+
+            double L0 = (y0Value - y[i1]) / (y[i0] - y[i1]);
+            double L1 = (y0Value - y[i0]) / (y[i1] - y[i0]);
+
+            double interpolatedTime = time[i0] * L0 + time[i1] * L1;
+            double interpolatedX = x[i0] * L0 + x[i1] * L1;
+            double interpolatedVx = vx[i0] * L0 + vx[i1] * L1;
+            double interpolatedVy = vy[i0] * L0 + vy[i1] * L1;
+
+            time[i1] = interpolatedTime;
+            x[i1] = interpolatedX;
+            y[i1] = 0;
+            vx[i1] = interpolatedVx;
+            vy[i1] = interpolatedVy;
+
+            double[] trimmedTime = new double[i1 + 1];
+            double[] trimmedX = new double[i1 + 1];
+            double[] trimmedY = new double[i1 + 1];
+            double[] trimmedVx = new double[i1 + 1];
+            double[] trimmedVy = new double[i1 + 1];
+
+            System.arraycopy(time, 0, trimmedTime, 0, i1 + 1);
+            System.arraycopy(x, 0, trimmedX, 0, i1 + 1);
+            System.arraycopy(y, 0, trimmedY, 0, i1 + 1);
+            System.arraycopy(vx, 0, trimmedVx, 0, i1 + 1);
+            System.arraycopy(vy, 0, trimmedVy, 0, i1 + 1);
+
+            return new TrajectoryData(trimmedTime, trimmedX, trimmedY, trimmedVx, trimmedVy);
+        }
+
+
         return new TrajectoryData(time, x, y, vx, vy);
     }
 }

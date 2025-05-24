@@ -12,25 +12,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
-    @FXML
     public Spinner<Double> alpha_spn;
-    @FXML
     public Spinner<Double> mass_spn;
-    @FXML
     public Spinner<Double> nstep_spn;
-    @FXML
     public Spinner<Double> x0_spn;
-    @FXML
     public Spinner<Double> y0_spn;
-    @FXML
     public Spinner<Double> vx0_spn;
-    @FXML
     public Spinner<Double> vy0_spn;
-    @FXML
     public Button calculate_btn;
-    @FXML
     public ToggleButton onegraphs_btn;
-    @FXML
     public ToggleButton fourgraphs_btn;
 
     private AppController appController;
@@ -42,14 +32,13 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         double dmax = Double.MAX_VALUE;
-        double dmin = Double.MIN_VALUE;
 
         SpinnerValueFactory<Double> alphaFactory =
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(dmin, dmax, 0.1, 0.1);
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(0, dmax, 0.1, 0.1);
         alpha_spn.setValueFactory(alphaFactory);
 
         SpinnerValueFactory<Double> massFactory =
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(dmin, dmax, 1.0, 1.0);
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(0, dmax, 1.0, 1.0);
         mass_spn.setValueFactory(massFactory);
 
         SpinnerValueFactory<Double> nstepFactory =
@@ -57,20 +46,20 @@ public class MenuController implements Initializable {
         nstep_spn.setValueFactory(nstepFactory);
 
         SpinnerValueFactory<Double> x0Factory =
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(dmin, dmax, 0, 1);
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(-100000000, dmax, 0, 1);
         x0_spn.setValueFactory(x0Factory);
 
         SpinnerValueFactory<Double> y0Factory =
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(dmin, dmax, 0, 1);
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(0, dmax, 0, 1);
         y0_spn.setValueFactory(y0Factory);
 
         SpinnerValueFactory<Double> vx0Factory =
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(dmin, dmax, 50, 1);
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(0, dmax, 50, 1);
         vx0_spn.setValueFactory(vx0Factory);
         vx0_spn.setEditable(true);
 
         SpinnerValueFactory<Double> vy0Factory =
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(dmin, dmax, 50, 1);
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(0, dmax, 50, 1);
         vy0_spn.setValueFactory(vy0Factory);
         vy0_spn.setEditable(true);
 

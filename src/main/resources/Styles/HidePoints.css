@@ -1,0 +1,7 @@
+.chart-symbol {
+    -fx-background-color: transparent !important;
+    -fx-background-radius: 0 !important;
+    -fx-padding: 0 !important;
+    -fx-shape: null !important;
+    visibility: hidden !important;
+}
