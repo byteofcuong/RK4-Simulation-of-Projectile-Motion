@@ -1,0 +1,54 @@
+/* Plot background */
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+/* Đường series (line) */
+.chart-series-line {
+    -fx-stroke-width: 3px;
+}
+
+/* Symbol trên các điểm dữ liệu */
+.chart-line-symbol {
+    -fx-background-color: white, #2a9df4;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 6px;
+    -fx-padding: 6px;
+}
+
+/* Legend (chú giải) */
+.chart-legend {
+    -fx-pref-width: 120px;
+    -fx-padding: 10px;
+}
+.chart-legend-item-symbol {
+    -fx-background-radius: 6px;
+    -fx-padding: 4px;
+}
+
+/* Trục (Axis) chung */
+.axis {
+    -fx-tick-label-font-size: 14px;
+}
+.axis .axis-label {
+    -fx-font-size: 16px;
+    -fx-padding: 5px 0 0 0;
+}
+/* Chiều dài và độ dày của các vạch tick */
+.axis .tick-mark {
+    -fx-tick-length: 8px;
+    -fx-stroke-width: 1px;
+}
+
+/* Các đường lưới (Grid lines) */
+.chart-horizontal-grid-lines,
+.chart-vertical-grid-lines {
+    -fx-stroke-width: 1px;
+    -fx-stroke: #cccccc;
+}
+
+/* Tooltip khi hover lên điểm */
+.chart-tooltip {
+    -fx-font-size: 12px;
+    -fx-padding: 6px;
+}
