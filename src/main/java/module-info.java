@@ -5,6 +5,8 @@ module com.npc.test_rk4 {
 
 
     opens com.npc.rk4 to javafx.fxml;
+    opens com.npc.rk4.Controllers to javafx.fxml;
+
     exports com.npc.rk4;
     exports com.npc.rk4.Controllers;
     exports com.npc.rk4.Models;
