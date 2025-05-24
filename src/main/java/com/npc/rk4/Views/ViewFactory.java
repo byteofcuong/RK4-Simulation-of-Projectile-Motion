@@ -2,6 +2,7 @@ package com.npc.rk4.Views;
 
 import com.npc.rk4.Controllers.MenuController;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -42,16 +43,18 @@ public class ViewFactory {
         createStage(loader);
     }
 
-    private void createStage(FXMLLoader loader) {
-        Scene scene = null;
+    public Stage createStage(FXMLLoader fxmlLoader) {
+        Stage stage = null;
         try {
-            scene = new Scene(loader.load());
-        } catch (IOException e) {
+            Parent parent = fxmlLoader.load();
+            stage = new Stage();
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+            stage.setTitle("Phương pháp RK4");
+            stage.show();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Runge-Kutta Trajectory Simulation");
-        stage.show();
+        return stage;
     }
 }

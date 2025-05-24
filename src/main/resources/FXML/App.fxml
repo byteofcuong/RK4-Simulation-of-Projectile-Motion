@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="app_parent" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.npc.rk4.Controllers.AppController">
+<BorderPane fx:id="app_parent" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.npc.rk4.Controllers.AppController">
     <center>
         <Pane fx:id="chartPane">
-            <LineChart fx:id="trajectoryChart" title="Quỹ đạo y(x)" prefWidth="800" prefHeight="600">
+            <LineChart fx:id="trajectoryChart" prefHeight="600" prefWidth="800" title="Quỹ đạo y(x)" animated="false">
                 <xAxis>
-                    <NumberAxis label="X Position (m)" />
+                    <NumberAxis label="X Position (m)" autoRanging="true" animated="false" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="Y Position (m)" />
+                    <NumberAxis label="Y Position (m)" autoRanging="true" animated="false" />
                 </yAxis>
             </LineChart>
 
-            <LineChart fx:id="xTimeChart" title="x(t)" prefWidth="400" prefHeight="300" layoutX="0" layoutY="0" visible="false">
+            <LineChart layoutX="0" layoutY="0" prefHeight="300" prefWidth="400" title="x(t)" visible="false" fx:id="xTimeChart" animated="false">
                 <xAxis>
-                    <NumberAxis label="Time (s)" />
+                    <NumberAxis label="Time (s)" autoRanging="true" animated="false" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="X Position (m)" />
+                    <NumberAxis label="X Position (m)" autoRanging="true" animated="false" />
                 </yAxis>
             </LineChart>
 
-            <LineChart fx:id="yTimeChart" title="y(t)" prefWidth="400" prefHeight="300" layoutX="400" layoutY="0" visible="false">
+            <LineChart fx:id="yTimeChart" layoutX="400" layoutY="0" prefHeight="300" prefWidth="400" title="y(t)" visible="false" animated="false">
                 <xAxis>
-                    <NumberAxis label="Time (s)" />
+                    <NumberAxis label="Time (s)" autoRanging="true" animated="false" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="Y Position (m)" />
+                    <NumberAxis label="Y Position (m)" autoRanging="true" animated="false" />
                 </yAxis>
             </LineChart>
 
-            <LineChart fx:id="vxTimeChart" title="vx(t)" prefWidth="400" prefHeight="300" layoutX="0" layoutY="300" visible="false">
+            <LineChart fx:id="vxTimeChart" layoutX="0" layoutY="300" prefHeight="300" prefWidth="400" title="vx(t)" visible="false" animated="false">
                 <xAxis>
-                    <NumberAxis label="Time (s)" />
+                    <NumberAxis label="Time (s)" autoRanging="true" animated="false" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="X Velocity (m/s)" />
+                    <NumberAxis label="X Velocity (m/s)" autoRanging="true" animated="false" />
                 </yAxis>
             </LineChart>
 
-            <LineChart fx:id="vyTimeChart" title="vy(t)" prefWidth="400" prefHeight="300" layoutX="400" layoutY="300" visible="false">
+            <LineChart fx:id="vyTimeChart" layoutX="400" layoutY="300" prefHeight="300" prefWidth="400" title="vy(t)" visible="false" animated="false">
                 <xAxis>
-                    <NumberAxis label="Time (s)" />
+                    <NumberAxis label="Time (s)" autoRanging="true" animated="false" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="Y Velocity (m/s)" />
+                    <NumberAxis label="Y Velocity (m/s)" autoRanging="true" animated="false" />
                 </yAxis>
             </LineChart>
         </Pane>
