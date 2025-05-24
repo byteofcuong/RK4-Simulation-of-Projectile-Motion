@@ -74,7 +74,6 @@ public class MenuController implements Initializable {
         vy0_spn.setValueFactory(vy0Factory);
         vy0_spn.setEditable(true);
 
-        // Thiết lập sự kiện cho các nút
         calculate_btn.setOnAction(this::onCalculate);
         onegraphs_btn.setOnAction(e -> showSingleGraph());
         fourgraphs_btn.setOnAction(e -> showFourGraphs());

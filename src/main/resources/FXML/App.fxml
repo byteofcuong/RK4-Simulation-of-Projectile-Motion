@@ -1,9 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 
-<BorderPane fx:id="app_parent" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.npc.rk4.Controllers.AppController">
+<BorderPane fx:id="app_parent" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.npc.rk4.Controllers.AppController">
+    <center>
+        <Pane fx:id="chartPane">
+            <LineChart fx:id="trajectoryChart" title="Quỹ đạo y(x)" prefWidth="800" prefHeight="600">
+                <xAxis>
+                    <NumberAxis label="X Position (m)" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Y Position (m)" />
+                </yAxis>
+            </LineChart>
 
+            <LineChart fx:id="xTimeChart" title="x(t)" prefWidth="400" prefHeight="300" layoutX="0" layoutY="0" visible="false">
+                <xAxis>
+                    <NumberAxis label="Time (s)" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="X Position (m)" />
+                </yAxis>
+            </LineChart>
+
+            <LineChart fx:id="yTimeChart" title="y(t)" prefWidth="400" prefHeight="300" layoutX="400" layoutY="0" visible="false">
+                <xAxis>
+                    <NumberAxis label="Time (s)" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Y Position (m)" />
+                </yAxis>
+            </LineChart>
+
+            <LineChart fx:id="vxTimeChart" title="vx(t)" prefWidth="400" prefHeight="300" layoutX="0" layoutY="300" visible="false">
+                <xAxis>
+                    <NumberAxis label="Time (s)" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="X Velocity (m/s)" />
+                </yAxis>
+            </LineChart>
+
+            <LineChart fx:id="vyTimeChart" title="vy(t)" prefWidth="400" prefHeight="300" layoutX="400" layoutY="300" visible="false">
+                <xAxis>
+                    <NumberAxis label="Time (s)" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Y Velocity (m/s)" />
+                </yAxis>
+            </LineChart>
+        </Pane>
+    </center>
 </BorderPane>
