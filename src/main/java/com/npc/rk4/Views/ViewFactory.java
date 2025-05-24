@@ -1,58 +1,42 @@
 package com.npc.rk4.Views;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import com.npc.rk4.Controllers.MenuController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ViewFactory {
-    private HBox menu;
+    private static ViewFactory viewFactory;
+    private MenuController menuController;
 
-    //one graphs view
-    private AnchorPane oneGraphsView;
+    private ViewFactory() {}
 
-    //
-    private ObjectProperty<MenuOptions> selectedMenuItem;
-
-    public ViewFactory() {
-        selectedMenuItem = new SimpleObjectProperty<>();
-    }
-
-    public ObjectProperty<MenuOptions> getSelectedMenuItem() {
-        return selectedMenuItem;
-    }
-
-    //load giao dien
-    public HBox getMenu() {
-        if (menu == null) {
-            try {
-                menu = new FXMLLoader(getClass().getResource("/FXML/Menu.fxml")).load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+    public static ViewFactory getInstance() {
+        if (viewFactory == null) {
+            viewFactory = new ViewFactory();
         }
-        return menu;
+        return viewFactory;
     }
 
-    public AnchorPane getOneGraphsView() {
-        if (oneGraphsView == null) {
-            try {
-                oneGraphsView = new FXMLLoader(getClass().getResource("/FXML/OneGraphs.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public Pane getMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Menu.fxml"));
+            Pane menuPane = loader.load();
+            menuController = loader.getController();
+            return menuPane;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-        return oneGraphsView;
     }
 
-    //show giao dien
+    public MenuController getMenuController() {
+        return menuController;
+    }
+
     public void showAppWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/App.fxml"));
         createStage(loader);
@@ -62,40 +46,12 @@ public class ViewFactory {
         Scene scene = null;
         try {
             scene = new Scene(loader.load());
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
         Stage stage = new Stage();
-        //stage.getIcons().add(new Image(String.valueOf(getClass().getResource(""))));
-        stage.setResizable(false);
         stage.setScene(scene);
-        stage.setTitle("RK4");
-
-        stage.setOnCloseRequest(event -> {     // khong nhan su kien khi goi stage.close()
-            try {
-                event.consume();
-                exit(stage);
-
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        });
-
+        stage.setTitle("Runge-Kutta Trajectory Simulation");
         stage.show();
-    }
-
-    public void exit(Stage stage) throws IOException {
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Close Window");
-        alert.setHeaderText("Confirm to exit program");
-        alert.setContentText("Do you want to exit ?");
-
-        if (alert.showAndWait().get() == ButtonType.OK) {
-            System.out.println("Exit successfully");
-            stage.close();
-        }
     }
 }

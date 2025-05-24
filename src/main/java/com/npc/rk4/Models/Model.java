@@ -1,13 +1,16 @@
 package com.npc.rk4.Models;
 
+import com.npc.rk4.Controllers.MenuController;
 import com.npc.rk4.Views.ViewFactory;
 
 public class Model {
     private static Model model;
     private final ViewFactory viewFactory;
+    private final MenuController menuController;
 
     private Model() {
-        this.viewFactory = new ViewFactory();
+        this.menuController = new MenuController();
+        this.viewFactory = ViewFactory.getInstance();
     }
 
     public static synchronized Model getInstance() {
@@ -19,5 +22,9 @@ public class Model {
 
     public ViewFactory getViewFactory() {
         return viewFactory;
+    }
+
+    public MenuController getMenuController() {
+        return menuController;
     }
 }
