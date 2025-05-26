@@ -1,6 +1,7 @@
 package com.npc.rk4.Controllers;
 
 import com.npc.rk4.Models.TrajectoryModel;
+import com.npc.rk4.Models.Euler;
 import com.npc.rk4.Views.ViewFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -106,17 +107,19 @@ public class AppController implements Initializable {
             double vx0 = values[5];
             double vy0 = values[6];
 
-            TrajectoryModel.TrajectoryData data = TrajectoryModel.calculateTrajectory(
+            TrajectoryModel.TrajectoryData rk4Data = TrajectoryModel.calculateTrajectory(
+                    alpha, mass, nSteps, x0, y0, vx0, vy0);
+            TrajectoryModel.TrajectoryData eulerData = TrajectoryModel.calculateTrajectoryEuler(
                     alpha, mass, nSteps, x0, y0, vx0, vy0);
 
-            updateCharts(data);
+            updateCharts(rk4Data, eulerData);
         } catch (Exception e) {
             System.err.println("Lỗi khi tính toán quỹ đạo: " + e.getMessage());
         }
     }
 
-    private void updateCharts(TrajectoryModel.TrajectoryData data) {
-        if (data == null || !chartsInitialized) return;
+    private void updateCharts(TrajectoryModel.TrajectoryData rk4Data, TrajectoryModel.TrajectoryData eulerData) {
+        if (rk4Data == null || !chartsInitialized) return;
 
         trajectoryChart.getData().clear();
         xTimeChart.getData().clear();
@@ -124,47 +127,64 @@ public class AppController implements Initializable {
         vxTimeChart.getData().clear();
         vyTimeChart.getData().clear();
 
-        // tạo các series mới
-        XYChart.Series<Number, Number> trajectorySeries = new XYChart.Series<>();
-        trajectorySeries.setName("Quỹ đạo");
+        XYChart.Series<Number, Number> rk4TrajectorySeries = new XYChart.Series<>();
+        rk4TrajectorySeries.setName("Quỹ đạo RK4");
+        XYChart.Series<Number, Number> rk4XSeries = new XYChart.Series<>();
+        rk4XSeries.setName("x(t) RK4");
+        XYChart.Series<Number, Number> rk4YSeries = new XYChart.Series<>();
+        rk4YSeries.setName("y(t) RK4");
+        XYChart.Series<Number, Number> rk4VxSeries = new XYChart.Series<>();
+        rk4VxSeries.setName("vx(t) RK4");
+        XYChart.Series<Number, Number> rk4VySeries = new XYChart.Series<>();
+        rk4VySeries.setName("vy(t) RK4");
 
-        XYChart.Series<Number, Number> xSeries = new XYChart.Series<>();
-        xSeries.setName("x(t)");
+        XYChart.Series<Number, Number> eulerTrajectorySeries = new XYChart.Series<>();
+        eulerTrajectorySeries.setName("Quỹ đạo Euler");
+        XYChart.Series<Number, Number> eulerXSeries = new XYChart.Series<>();
+        eulerXSeries.setName("x(t) Euler");
+        XYChart.Series<Number, Number> eulerYSeries = new XYChart.Series<>();
+        eulerYSeries.setName("y(t) Euler");
+        XYChart.Series<Number, Number> eulerVxSeries = new XYChart.Series<>();
+        eulerVxSeries.setName("vx(t) Euler");
+        XYChart.Series<Number, Number> eulerVySeries = new XYChart.Series<>();
+        eulerVySeries.setName("vy(t) Euler");
 
-        XYChart.Series<Number, Number> ySeries = new XYChart.Series<>();
-        ySeries.setName("y(t)");
-
-        XYChart.Series<Number, Number> vxSeries = new XYChart.Series<>();
-        vxSeries.setName("vx(t)");
-
-        XYChart.Series<Number, Number> vySeries = new XYChart.Series<>();
-        vySeries.setName("vy(t)");
-
-        // thêm dữ liệu vào các series
-        for (int i = 0; i < data.time.length; i++) {
-            if (data.y[i] >= 0) {  // chỉ hiển thị dữ liệu khi y >= 0
-                trajectorySeries.getData().add(new XYChart.Data<>(data.x[i], data.y[i]));
-                xSeries.getData().add(new XYChart.Data<>(data.time[i], data.x[i]));
-                ySeries.getData().add(new XYChart.Data<>(data.time[i], data.y[i]));
-                vxSeries.getData().add(new XYChart.Data<>(data.time[i], data.vx[i]));
-                vySeries.getData().add(new XYChart.Data<>(data.time[i], data.vy[i]));
+        for (int i = 0; i < rk4Data.time.length; i++) {
+            if (rk4Data.y[i] >= 0) {
+                rk4TrajectorySeries.getData().add(new XYChart.Data<>(rk4Data.x[i], rk4Data.y[i]));
+                rk4XSeries.getData().add(new XYChart.Data<>(rk4Data.time[i], rk4Data.x[i]));
+                rk4YSeries.getData().add(new XYChart.Data<>(rk4Data.time[i], rk4Data.y[i]));
+                rk4VxSeries.getData().add(new XYChart.Data<>(rk4Data.time[i], rk4Data.vx[i]));
+                rk4VySeries.getData().add(new XYChart.Data<>(rk4Data.time[i], rk4Data.vy[i]));
+            }
+        }
+        for (int i = 0; i < eulerData.time.length; i++) {
+            if (eulerData.y[i] >= 0) {
+                eulerTrajectorySeries.getData().add(new XYChart.Data<>(eulerData.x[i], eulerData.y[i]));
+                eulerXSeries.getData().add(new XYChart.Data<>(eulerData.time[i], eulerData.x[i]));
+                eulerYSeries.getData().add(new XYChart.Data<>(eulerData.time[i], eulerData.y[i]));
+                eulerVxSeries.getData().add(new XYChart.Data<>(eulerData.time[i], eulerData.vx[i]));
+                eulerVySeries.getData().add(new XYChart.Data<>(eulerData.time[i], eulerData.vy[i]));
             }
         }
 
-        // thêm series vào các đồ thị
-        trajectoryChart.getData().add(trajectorySeries);
-        xTimeChart.getData().add(xSeries);
-        yTimeChart.getData().add(ySeries);
-        vxTimeChart.getData().add(vxSeries);
-        vyTimeChart.getData().add(vySeries);
+        trajectoryChart.getData().addAll(rk4TrajectorySeries, eulerTrajectorySeries);
+        xTimeChart.getData().addAll(rk4XSeries, eulerXSeries);
+        yTimeChart.getData().addAll(rk4YSeries, eulerYSeries);
+        vxTimeChart.getData().addAll(rk4VxSeries, eulerVxSeries);
+        vyTimeChart.getData().addAll(rk4VySeries, eulerVySeries);
 
-        // thêm tooltips
         Platform.runLater(() -> {
-            addTooltips(trajectorySeries, data);
-            addTooltips(xSeries, data);
-            addTooltips(ySeries, data);
-            addTooltips(vxSeries, data);
-            addTooltips(vySeries, data);
+            addTooltips(rk4TrajectorySeries, rk4Data);
+            addTooltips(eulerTrajectorySeries, eulerData);
+            addTooltips(rk4XSeries, rk4Data);
+            addTooltips(eulerXSeries, eulerData);
+            addTooltips(rk4YSeries, rk4Data);
+            addTooltips(eulerYSeries, eulerData);
+            addTooltips(rk4VxSeries, rk4Data);
+            addTooltips(eulerVxSeries, eulerData);
+            addTooltips(rk4VySeries, rk4Data);
+            addTooltips(eulerVySeries, eulerData);
         });
     }
 

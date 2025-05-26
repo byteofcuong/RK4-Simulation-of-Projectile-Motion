@@ -1,7 +1,11 @@
-.chart-symbol {
-    -fx-background-color: transparent !important;
-    -fx-background-radius: 0 !important;
-    -fx-padding: 0 !important;
-    -fx-shape: null !important;
-    visibility: hidden !important;
+/*.chart-line-symbol {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+    -fx-scale-x: 0;
+    -fx-scale-y: 0;
+}*/
+.chart-line-symbol {
+    -fx-background-color: transparent;
+    -fx-padding: 3;
 }

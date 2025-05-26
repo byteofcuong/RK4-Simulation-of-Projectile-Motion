@@ -7,11 +7,7 @@ public class RungeKutta {
         R apply(T t, U u, V v);
     }
 
-    public static double[][] secondOrderRungeKutta(
-            TriFunction<Double, Double, Double, Double> d2y,
-            double xMin, double xMax,
-            double y0, double dy0,
-            int nSteps) {
+    public static double[][] secondOrderRungeKutta(TriFunction<Double, Double, Double, Double> d2y, double xMin, double xMax, double y0, double dy0, int nSteps) {
 
         double[] x = linspace(xMin, xMax, nSteps + 1);
         double h = x[1] - x[0];
