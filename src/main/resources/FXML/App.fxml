@@ -8,48 +8,48 @@
 <BorderPane fx:id="app_parent" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.npc.rk4.Controllers.AppController">
     <center>
         <Pane fx:id="chartPane">
-            <LineChart fx:id="trajectoryChart" prefHeight="600" prefWidth="800" title="Quỹ đạo y(x)" animated="false">
+            <LineChart fx:id="trajectoryChart" animated="false" prefHeight="600" prefWidth="800" stylesheets="@../Styles/ShowPoints.css" title="Quỹ đạo y(x)">
                 <xAxis>
-                    <NumberAxis label="X Position (m)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="X Position (m)" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="Y Position (m)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="Y Position (m)" />
                 </yAxis>
             </LineChart>
 
-            <LineChart layoutX="0" layoutY="0" prefHeight="300" prefWidth="400" title="x(t)" visible="false" fx:id="xTimeChart" animated="false">
+            <LineChart animated="false" layoutX="0" layoutY="0" prefHeight="300" prefWidth="400" stylesheets="@../Styles/HidePoints.css" title="x(t)" visible="false" fx:id="xTimeChart">
                 <xAxis>
-                    <NumberAxis label="Time (s)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="Time (s)" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="X Position (m)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="X Position (m)" />
                 </yAxis>
             </LineChart>
 
-            <LineChart fx:id="yTimeChart" layoutX="400" layoutY="0" prefHeight="300" prefWidth="400" title="y(t)" visible="false" animated="false">
+            <LineChart fx:id="yTimeChart" animated="false" layoutX="400" layoutY="0" prefHeight="300" prefWidth="400" stylesheets="@../Styles/HidePoints.css" title="y(t)" visible="false">
                 <xAxis>
-                    <NumberAxis label="Time (s)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="Time (s)" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="Y Position (m)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="Y Position (m)" />
                 </yAxis>
             </LineChart>
 
-            <LineChart fx:id="vxTimeChart" layoutX="0" layoutY="300" prefHeight="300" prefWidth="400" title="vx(t)" visible="false" animated="false">
+            <LineChart fx:id="vxTimeChart" animated="false" layoutX="0" layoutY="300" prefHeight="300" prefWidth="400" stylesheets="@../Styles/HidePoints.css" title="vx(t)" visible="false">
                 <xAxis>
-                    <NumberAxis label="Time (s)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="Time (s)" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="X Velocity (m/s)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="X Velocity (m/s)" />
                 </yAxis>
             </LineChart>
 
-            <LineChart fx:id="vyTimeChart" layoutX="400" layoutY="300" prefHeight="300" prefWidth="400" title="vy(t)" visible="false" animated="false">
+            <LineChart fx:id="vyTimeChart" animated="false" layoutX="400" layoutY="300" prefHeight="300" prefWidth="400" stylesheets="@../Styles/HidePoints.css" title="vy(t)" visible="false">
                 <xAxis>
-                    <NumberAxis label="Time (s)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="Time (s)" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="Y Velocity (m/s)" autoRanging="true" animated="false" />
+                    <NumberAxis animated="false" autoRanging="true" label="Y Velocity (m/s)" />
                 </yAxis>
             </LineChart>
         </Pane>
