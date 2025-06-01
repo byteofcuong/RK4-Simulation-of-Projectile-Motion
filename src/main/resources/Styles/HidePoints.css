@@ -1,11 +1,24 @@
-/*.chart-line-symbol {
-    -fx-background-color: transparent;
-    -fx-padding: 0;
-    -fx-shape: "";
-    -fx-scale-x: 0;
-    -fx-scale-y: 0;
-}*/
 .chart-line-symbol {
     -fx-background-color: transparent;
     -fx-padding: 3;
+}
+
+.chart-series-line.series0 {
+    -fx-stroke: rgba(31, 119, 180, 0.7);
+    -fx-stroke-width: 2px;
+}
+
+.chart-series-line.series1 {
+    -fx-stroke: rgba(214, 39, 40, 0.7);
+    -fx-stroke-width: 2px;
+}
+
+.chart-series-line.series2 {
+    -fx-stroke: rgba(44, 160, 44, 0.7);
+    -fx-stroke-width: 2px;
+}
+
+.chart-series-line.series3 {
+    -fx-stroke: rgba(255, 127, 14, 0.7);
+    -fx-stroke-width: 2px;
 }

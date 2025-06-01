@@ -9,3 +9,31 @@
     -fx-fill: #FFFFFF;
     -fx-font-size: 1.2em;
 }
+
+.menu_container Button{
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #132A13;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center_left;
+}
+
+.menu_container Button:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: transparent;;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #9FCBAA;
+    -fx-background-radius: 4px;
+    -fx-padding: 0 6 0 6;
+}
+
+.spinner .arrow {
+    -fx-background-color: #FFFFFF; /* Màu mũi tên */
+}

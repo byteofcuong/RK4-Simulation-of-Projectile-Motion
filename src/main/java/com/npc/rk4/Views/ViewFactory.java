@@ -50,7 +50,7 @@ public class ViewFactory {
             stage = new Stage();
             Scene scene = new Scene(parent);
             stage.setScene(scene);
-            stage.setTitle("Phương pháp RK4");
+            stage.setTitle("RK4");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,3 +1,40 @@
 .chart-line-symbol {
     -fx-padding: 4.3;
 }
+
+.chart-series-line.series0 {
+    -fx-stroke: rgba(31, 119, 180, 0.7);
+    -fx-stroke-width: 3px;
+}
+
+.chart-series-line.series1 {
+    -fx-stroke: rgba(214, 39, 40, 0.7);
+    -fx-stroke-width: 3px;
+}
+
+.chart-series-line.series2 {
+    -fx-stroke: rgba(44, 160, 44, 0.7);
+    -fx-stroke-width: 3px;
+}
+
+.chart-series-line.series3 {
+    -fx-stroke: rgba(255, 127, 14, 0.7);
+    -fx-stroke-width: 3px;
+}
+
+
+.chart-line-symbol.series0 {
+    -fx-background-color: rgba(31, 119, 180, 0.7), white;
+}
+
+.chart-line-symbol.series1 {
+    -fx-background-color: rgba(214, 39, 40, 0.7), white;
+}
+
+.chart-line-symbol.series2 {
+    -fx-background-color: rgba(44, 160, 44, 0.7), white;
+}
+
+.chart-line-symbol.series3 {
+    -fx-background-color: rgba(255, 127, 14, 0.7), white;
+}
