@@ -40,7 +40,6 @@ public class AppController implements Initializable {
     private Point2D dragStart;
     private Map<LineChart<Number, Number>, double[]> originalRanges = new HashMap<>();
 
-    // Danh sách solver và tên hiển thị
     private static final List<ODESolver> solvers = Arrays.asList(
             new EulerSolver(),
             new RungeKuttaSolver(),
@@ -78,7 +77,6 @@ public class AppController implements Initializable {
         vxTimeChart.setAnimated(false);
         vyTimeChart.setAnimated(false);
 
-        // Thêm xử lý sự kiện zoom và pan cho các đồ thị
         setupZoomAndPan(trajectoryChart);
         setupZoomAndPan(xTimeChart);
         setupZoomAndPan(yTimeChart);
@@ -87,14 +85,12 @@ public class AppController implements Initializable {
     }
 
     private void setupZoomAndPan(LineChart<Number, Number> chart) {
-        // Xử lý sự kiện scroll để zoom
         chart.setOnScroll((ScrollEvent event) -> {
             event.consume();
             double zoomFactor = event.getDeltaY() > 0 ? 0.9 : 1.1;
             zoom(chart, zoomFactor);
         });
 
-        // Xử lý sự kiện kéo thả để pan
         chart.setOnMousePressed((MouseEvent event) -> {
             dragStart = new Point2D(event.getX(), event.getY());
         });
@@ -117,7 +113,6 @@ public class AppController implements Initializable {
         NumberAxis xAxis = (NumberAxis) chart.getXAxis();
         NumberAxis yAxis = (NumberAxis) chart.getYAxis();
 
-        // Tắt auto ranging khi zoom
         xAxis.setAutoRanging(false);
         yAxis.setAutoRanging(false);
 
@@ -141,7 +136,6 @@ public class AppController implements Initializable {
         NumberAxis xAxis = (NumberAxis) chart.getXAxis();
         NumberAxis yAxis = (NumberAxis) chart.getYAxis();
 
-        // Tắt auto ranging khi pan
         xAxis.setAutoRanging(false);
         yAxis.setAutoRanging(false);
 
@@ -226,33 +220,28 @@ public class AppController implements Initializable {
         if (allData == null || allData.isEmpty() || !chartsInitialized)
             return;
 
-        // Xóa dữ liệu cũ
         trajectoryChart.getData().clear();
         xTimeChart.getData().clear();
         yTimeChart.getData().clear();
         vxTimeChart.getData().clear();
         vyTimeChart.getData().clear();
 
-        // Tạo series cho từng phương pháp
         for (int idx = 0; idx < allData.size(); idx++) {
             TrajectoryModel.TrajectoryData data = allData.get(idx);
             String name = solverNames.get(idx);
 
-            // Tạo series cho từng loại đồ thị
             XYChart.Series<Number, Number> trajectorySeries = createSeries(data.x, data.y, "Quỹ đạo " + name);
             XYChart.Series<Number, Number> xSeries = createSeries(data.time, data.x, "x(t) " + name);
             XYChart.Series<Number, Number> ySeries = createSeries(data.time, data.y, "y(t) " + name);
             XYChart.Series<Number, Number> vxSeries = createSeries(data.time, data.vx, "vx(t) " + name);
             XYChart.Series<Number, Number> vySeries = createSeries(data.time, data.vy, "vy(t) " + name);
 
-            // Thêm vào đồ thị
             trajectoryChart.getData().add(trajectorySeries);
             xTimeChart.getData().add(xSeries);
             yTimeChart.getData().add(ySeries);
             vxTimeChart.getData().add(vxSeries);
             vyTimeChart.getData().add(vySeries);
 
-            // Thêm tooltips
             Platform.runLater(() -> {
                 addTooltips(trajectorySeries, data);
                 addTooltips(xSeries, data);
@@ -262,7 +251,6 @@ public class AppController implements Initializable {
             });
         }
 
-        // Lưu phạm vi sau khi vẽ đồ thị
         Platform.runLater(() -> {
             saveChartRanges(trajectoryChart);
             saveChartRanges(xTimeChart);
@@ -276,12 +264,9 @@ public class AppController implements Initializable {
         XYChart.Series<Number, Number> series = new XYChart.Series<>();
         series.setName(name);
 
-        // Kiểm tra xem có phải là đồ thị vy(t) không
         boolean isVyGraph = name.contains("vy(t)");
 
         for (int i = 0; i < xData.length; i++) {
-            // Nếu là đồ thị vy(t) thì hiển thị tất cả các điểm
-            // Nếu không phải vy(t) thì chỉ hiển thị các điểm có y >= 0
             if (isVyGraph || yData[i] >= 0) {
                 series.getData().add(new XYChart.Data<>(xData[i], yData[i]));
             }
@@ -294,11 +279,9 @@ public class AppController implements Initializable {
         NumberAxis xAxis = (NumberAxis) chart.getXAxis();
         NumberAxis yAxis = (NumberAxis) chart.getYAxis();
 
-        // Đợi JavaFX tính toán phạm vi tự động
         xAxis.setAutoRanging(true);
         yAxis.setAutoRanging(true);
 
-        // Lưu phạm vi đã tính toán
         originalRanges.put(chart, new double[] {
                 xAxis.getLowerBound(), xAxis.getUpperBound(),
                 yAxis.getLowerBound(), yAxis.getUpperBound()
